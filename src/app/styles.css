@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-title {
+  margin: 0 0 12px;
+}
+
+.main-layout {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.card-header {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.empty-state {
+  padding: 12px;
+}
+
+.empty-copy {
+  margin: 0;
+}
