@@ -43,8 +43,22 @@ What this does:
 
 - Builds the production bundle.
 - Starts the production preview server on `http://localhost:4173`.
-- Runs Lighthouse CI for 3 runs in desktop mode.
+- Runs Lighthouse CI in desktop mode.
+- Uses `1` run on Windows in the recovery wrapper for stability (`lhci:raw` keeps the original 3-run behavior).
 - Applies assertion thresholds and fails if any are below target.
+- On Windows, routes temp files to a project-local folder to reduce `EPERM` temp-cleanup failures.
+- Runs Chrome with a persistent profile path (`.lighthouseci/chrome-profile`) to avoid temp-profile cleanup races on Windows.
+- If LHCI still crashes only during temp cleanup, recovers a fresh report (from `.lighthouseci`, `lhci_reports/manifest.json`, or LHCI stdout JSON) into:
+  - `lhci_reports/latest-desktop.html`
+  - `lhci_reports/latest-desktop.json`
+  - and still enforces score thresholds.
+- If recovery artifacts are still missing, runs one direct Lighthouse fallback pass and refreshes `latest-desktop.*`.
+
+To run the original raw command (no recovery wrapper):
+
+```bash
+npm run lhci:raw
+```
 
 Thresholds:
 

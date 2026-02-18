@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview --port 4173 --strictPort",
     "test:e2e": "playwright test",
-    "lhci:autorun": "npm run build && lhci autorun --collect.url=http://localhost:4173/ --upload.target=filesystem --upload.outputDir=./lhci_reports",
+    "lhci:autorun": "node scripts/lhci-autorun.mjs",
+    "lhci:raw": "npm run build && lhci autorun --collect.url=http://localhost:4173/ --upload.target=filesystem --upload.outputDir=./lhci_reports",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
