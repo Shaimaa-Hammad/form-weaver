@@ -20,6 +20,7 @@ body {
 .main-layout {
   display: grid;
   gap: 12px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .card {
@@ -42,4 +43,67 @@ body {
 
 .empty-copy {
   margin: 0;
+}
+
+.editor-content {
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.form-row {
+  display: grid;
+  gap: 6px;
+}
+
+.input-label {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.text-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.text-input.is-invalid {
+  border-color: #cc3333;
+}
+
+.segmented-control {
+  display: flex;
+  gap: 8px;
+}
+
+.segment {
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.segment.is-active {
+  border-color: #138a7a;
+  background: #e8f7f4;
+}
+
+.helper-text {
+  margin: 0;
+  color: #555;
+  font-size: 0.82rem;
+}
+
+.helper-text.is-danger,
+.input-error {
+  color: #b42318;
+}
+
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
 }

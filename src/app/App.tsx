@@ -1,6 +1,8 @@
 import { useReducer } from 'react'
 
+import { FieldEditor } from '@components/FieldEditor'
 import { FieldsList } from '@components/FieldsList'
+import type { FieldType } from '@domain/types'
 import { appReducer, initialState } from '@domain/reducer'
 import { createFieldByType } from '@domain/types'
 import { validateAll } from '@domain/validate'
@@ -22,6 +24,17 @@ function App() {
     dispatch({ type: 'delete_field', payload: { id } })
   }
 
+  const handleTypeChange = (fieldType: FieldType) => {
+    if (!selectedField) {
+      return
+    }
+
+    dispatch({
+      type: 'change_field_type',
+      payload: { id: selectedField.id, fieldType },
+    })
+  }
+
   return (
     <div className="app-shell">
       <header className="app-header">
@@ -38,20 +51,47 @@ function App() {
           onDeleteField={handleDeleteField}
         />
 
-        <section className="card">
-          <header className="card-header">
-            <h2 className="card-title">Selected Field</h2>
-          </header>
-          <div className="empty-state">
-            {selectedField ? (
-              <p className="empty-copy">
-                {selectedField.fieldName || 'Untitled'} ({selectedField.type})
-              </p>
-            ) : (
-              <p className="empty-copy">Select a field from the list.</p>
-            )}
-          </div>
-        </section>
+        <FieldEditor
+          field={selectedField}
+          errors={selectedField ? errorsById[selectedField.id] ?? {} : {}}
+          onFieldNameChange={(value) => {
+            if (!selectedField) {
+              return
+            }
+            dispatch({
+              type: 'update_field_name',
+              payload: { id: selectedField.id, fieldName: value },
+            })
+          }}
+          onTypeChange={handleTypeChange}
+          onStringValueChange={(value) => {
+            if (!selectedField || selectedField.type !== 'string') {
+              return
+            }
+            dispatch({
+              type: 'update_string_value',
+              payload: { id: selectedField.id, value },
+            })
+          }}
+          onNumberValueChange={(value) => {
+            if (!selectedField || selectedField.type !== 'number') {
+              return
+            }
+            dispatch({
+              type: 'update_number_value',
+              payload: { id: selectedField.id, value },
+            })
+          }}
+          onBooleanValueChange={(value) => {
+            if (!selectedField || selectedField.type !== 'boolean') {
+              return
+            }
+            dispatch({
+              type: 'update_boolean_value',
+              payload: { id: selectedField.id, value },
+            })
+          }}
+        />
       </main>
     </div>
   )
