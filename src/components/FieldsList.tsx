@@ -9,7 +9,8 @@ interface FieldsListProps {
   onDeleteField: (id: string) => void
 }
 
-const formatType = (type: Field['type']): string => type.charAt(0).toUpperCase() + type.slice(1)
+const formatType = (type: Field['type']): string =>
+  type.charAt(0).toUpperCase() + type.slice(1)
 
 export function FieldsList({
   fields,
@@ -36,7 +37,9 @@ export function FieldsList({
       {fields.length === 0 ? (
         <div className="empty-state" role="status">
           <p className="empty-title">No fields yet</p>
-          <p className="empty-copy">Start by adding your first field on the left panel.</p>
+          <p className="empty-copy">
+            Start by adding your first field on the left panel.
+          </p>
         </div>
       ) : (
         <ul className="fields-list">
@@ -46,7 +49,10 @@ export function FieldsList({
             const isSelected = selectedId === field.id
 
             return (
-              <li key={field.id} className={`field-row ${isSelected ? 'is-selected' : ''}`}>
+              <li
+                key={field.id}
+                className={`field-row ${isSelected ? 'is-selected' : ''}`}
+              >
                 <button
                   type="button"
                   className="field-select-button"
@@ -74,7 +80,7 @@ export function FieldsList({
                     aria-label={`Edit ${displayName}`}
                     onClick={() => onSelectField(field.id)}
                   >
-                    ✎
+                    E
                   </button>
                   <button
                     type="button"
@@ -82,7 +88,7 @@ export function FieldsList({
                     aria-label={`Delete ${displayName}`}
                     onClick={() => onDeleteField(field.id)}
                   >
-                    ×
+                    X
                   </button>
                 </div>
               </li>

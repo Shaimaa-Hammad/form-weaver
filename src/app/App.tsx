@@ -4,8 +4,8 @@ import { FieldEditor } from '@components/FieldEditor'
 import { FieldsList } from '@components/FieldsList'
 import { JsonPreview } from '@components/JsonPreview'
 import { Toast } from '@components/Toast'
-import type { FieldType } from '@domain/types'
 import { appReducer, initialState } from '@domain/reducer'
+import type { FieldType } from '@domain/types'
 import { createFieldByType } from '@domain/types'
 import { hasValidationErrors, validateAll } from '@domain/validate'
 import { createSchema, updateSchema } from '@services/schemaApi'
@@ -13,8 +13,9 @@ import { createSchema, updateSchema } from '@services/schemaApi'
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
-  const errorsById = validateAll(state.fields)
   const selectedField = state.fields.find((field) => field.id === state.selectedId)
+  const errorsById = validateAll(state.fields)
+  const selectedErrors = selectedField ? errorsById[selectedField.id] ?? {} : {}
 
   const handleAddField = () => {
     dispatch({
@@ -100,6 +101,7 @@ function App() {
     <div className="app-shell">
       <header className="app-header">
         <div>
+          <p className="eyebrow">Dynamic Schema Admin</p>
           <h1 className="app-title">Dynamic Form Builder</h1>
         </div>
         <div className="save-mode-card">
@@ -107,60 +109,65 @@ function App() {
           <strong className="save-mode-value">
             {state.schemaId ? 'PUT (update)' : 'POST (create)'}
           </strong>
+          <p className="save-mode-meta">
+            {state.schemaId ? `Schema ID: ${state.schemaId}` : 'No schemaId yet'}
+          </p>
         </div>
       </header>
 
       <main className="main-layout">
-        <FieldsList
-          fields={state.fields}
-          selectedId={state.selectedId}
-          errorsById={errorsById}
-          onAddField={handleAddField}
-          onSelectField={(id) => dispatch({ type: 'select_field', payload: { id } })}
-          onDeleteField={handleDeleteField}
-        />
+        <section className="panel-grid">
+          <FieldsList
+            fields={state.fields}
+            selectedId={state.selectedId}
+            errorsById={errorsById}
+            onAddField={handleAddField}
+            onSelectField={(id) => dispatch({ type: 'select_field', payload: { id } })}
+            onDeleteField={handleDeleteField}
+          />
 
-        <FieldEditor
-          field={selectedField}
-          errors={selectedField ? errorsById[selectedField.id] ?? {} : {}}
-          onFieldNameChange={(value) => {
-            if (!selectedField) {
-              return
-            }
-            dispatch({
-              type: 'update_field_name',
-              payload: { id: selectedField.id, fieldName: value },
-            })
-          }}
-          onTypeChange={handleTypeChange}
-          onStringValueChange={(value) => {
-            if (!selectedField || selectedField.type !== 'string') {
-              return
-            }
-            dispatch({
-              type: 'update_string_value',
-              payload: { id: selectedField.id, value },
-            })
-          }}
-          onNumberValueChange={(value) => {
-            if (!selectedField || selectedField.type !== 'number') {
-              return
-            }
-            dispatch({
-              type: 'update_number_value',
-              payload: { id: selectedField.id, value },
-            })
-          }}
-          onBooleanValueChange={(value) => {
-            if (!selectedField || selectedField.type !== 'boolean') {
-              return
-            }
-            dispatch({
-              type: 'update_boolean_value',
-              payload: { id: selectedField.id, value },
-            })
-          }}
-        />
+          <FieldEditor
+            field={selectedField}
+            errors={selectedErrors}
+            onFieldNameChange={(value) => {
+              if (!selectedField) {
+                return
+              }
+              dispatch({
+                type: 'update_field_name',
+                payload: { id: selectedField.id, fieldName: value },
+              })
+            }}
+            onTypeChange={handleTypeChange}
+            onStringValueChange={(value) => {
+              if (!selectedField || selectedField.type !== 'string') {
+                return
+              }
+              dispatch({
+                type: 'update_string_value',
+                payload: { id: selectedField.id, value },
+              })
+            }}
+            onNumberValueChange={(value) => {
+              if (!selectedField || selectedField.type !== 'number') {
+                return
+              }
+              dispatch({
+                type: 'update_number_value',
+                payload: { id: selectedField.id, value },
+              })
+            }}
+            onBooleanValueChange={(value) => {
+              if (!selectedField || selectedField.type !== 'boolean') {
+                return
+              }
+              dispatch({
+                type: 'update_boolean_value',
+                payload: { id: selectedField.id, value },
+              })
+            }}
+          />
+        </section>
 
         <JsonPreview schemaId={state.schemaId} fields={state.fields} />
 
@@ -175,6 +182,7 @@ function App() {
             disabled={state.saving || !state.dirty}
             aria-busy={state.saving}
           >
+            {state.saving ? <span className="spinner" aria-hidden="true" /> : null}
             {state.saving ? 'Saving...' : 'Save'}
           </button>
         </div>
