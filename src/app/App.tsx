@@ -2,6 +2,7 @@ import { useReducer } from 'react'
 
 import { FieldEditor } from '@components/FieldEditor'
 import { FieldsList } from '@components/FieldsList'
+import { JsonPreview } from '@components/JsonPreview'
 import { Toast } from '@components/Toast'
 import type { FieldType } from '@domain/types'
 import { appReducer, initialState } from '@domain/reducer'
@@ -160,6 +161,8 @@ function App() {
             })
           }}
         />
+
+        <JsonPreview schemaId={state.schemaId} fields={state.fields} />
 
         <div className="action-bar" role="region" aria-label="Form actions">
           <p className={`dirty-state ${state.dirty ? 'is-dirty' : ''}`}>

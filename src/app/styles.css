@@ -135,6 +135,27 @@ body {
   padding: 10px 12px;
 }
 
+.json-card {
+  grid-column: 1 / -1;
+  overflow: hidden;
+}
+
+.json-summary {
+  cursor: pointer;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-weight: 600;
+}
+
+.json-output {
+  margin: 0;
+  padding: 12px;
+  max-height: 220px;
+  overflow: auto;
+  color: #d1f6f0;
+  background: #0b2431;
+}
+
 .dirty-state {
   margin: 0;
   color: #666;
