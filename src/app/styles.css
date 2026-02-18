@@ -17,6 +17,29 @@ body {
   margin: 0 0 12px;
 }
 
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.save-mode-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.save-mode-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.save-mode-value {
+  font-size: 0.9rem;
+}
+
 .main-layout {
   display: grid;
   gap: 12px;
@@ -100,6 +123,75 @@ body {
 .helper-text.is-danger,
 .input-error {
   color: #b42318;
+}
+
+.action-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.dirty-state {
+  margin: 0;
+  color: #666;
+}
+
+.dirty-state.is-dirty {
+  color: #b45309;
+}
+
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #0f766e;
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.toast-success {
+  background: #ecfdf3;
+  color: #14532d;
+}
+
+.toast-error {
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+.toast-message {
+  margin: 0;
+}
+
+.toast-close {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  padding: 5px 8px;
 }
 
 @media (max-width: 900px) {
