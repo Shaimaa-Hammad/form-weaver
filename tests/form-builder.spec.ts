@@ -12,6 +12,7 @@ test.describe('Dynamic Form Builder', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
     await expect(page.getByRole('heading', { name: 'Dynamic Form Builder' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Add field' })).toBeVisible()
   })
 
   test.describe('A) Add String Field and Save Successfully', () => {

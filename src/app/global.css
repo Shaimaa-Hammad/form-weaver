@@ -1,0 +1,36 @@
+:root {
+  --bg-base: #f2f5f8;
+  --card-bg: #ffffff;
+  --card-border: #d6dee6;
+  --text-primary: #1a2633;
+  --text-muted: #5c6d80;
+  --accent: #0f766e;
+  --accent-dark: #0b5f58;
+  --danger: #b42318;
+  --danger-soft: #fef3f2;
+  --warning: #b45309;
+  --shadow-soft: 0 18px 38px rgba(15, 23, 42, 0.08);
+
+  color: var(--text-primary);
+  font-family: 'Manrope', 'Segoe UI Variable', 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 500px at 0% 0%, #d8f4ef 0%, transparent 55%),
+    radial-gradient(760px 460px at 100% 0%, #fff2d3 0%, transparent 55%), var(--bg-base);
+  color: var(--text-primary);
+}
+
+#root {
+  min-height: 100vh;
+}

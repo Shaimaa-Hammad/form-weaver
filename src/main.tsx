@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './app/App'
-import './app/styles.css'
+import './app/global.css'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('Root element was not found.')
+}
+
+const mountApp = async (): Promise<void> => {
+  const [{ StrictMode, createElement }, { createRoot }, { default: App }] = await Promise.all([
+    import('react'),
+    import('react-dom/client'),
+    import('./app/App'),
+  ])
+
+  createRoot(rootElement).render(createElement(StrictMode, null, createElement(App)))
+}
+
+void mountApp()

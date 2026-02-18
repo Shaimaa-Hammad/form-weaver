@@ -1,0 +1,196 @@
+.card {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+}
+
+.fieldsCard {
+  min-height: 350px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 15px;
+  border-bottom: 1px solid #e5ebf1;
+}
+
+.cardTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.countBadge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.btn {
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  padding: 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: #edf4ff;
+  color: #1d4ed8;
+  border: 1px solid #c9dcff;
+}
+
+.fieldsList {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 8px;
+  background: #f8fbfd;
+}
+
+.isSelected {
+  border-color: #99d5cb;
+  background: #ecf9f6;
+}
+
+.fieldSelectButton {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.fieldNameWrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.fieldName {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.typePill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.73rem;
+  border: 1px solid transparent;
+}
+
+.typePillString {
+  color: #1f2937;
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.typePillNumber {
+  color: #0f172a;
+  background: #fef3c7;
+  border-color: #fcd34d;
+}
+
+.typePillBoolean {
+  color: #134e4a;
+  background: #ccfbf1;
+  border-color: #5eead4;
+}
+
+.fieldActions {
+  display: flex;
+  gap: 6px;
+  align-items: start;
+}
+
+.iconButton {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  border-radius: 9px;
+  min-width: 32px;
+  height: 32px;
+  font: inherit;
+  font-size: 0.94rem;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  border-color: #94a3b8;
+}
+
+.danger {
+  border-color: #f5c2c0;
+  color: var(--danger);
+}
+
+.errorChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--danger);
+}
+
+.errorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+.emptyState {
+  padding: 24px 15px;
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-weight: 700;
+}
+
+.emptyCopy {
+  margin: 7px 0 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 920px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

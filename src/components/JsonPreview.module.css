@@ -1,0 +1,33 @@
+.card {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+}
+
+.jsonCard {
+  overflow: hidden;
+}
+
+.jsonSummary {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 15px;
+  border-bottom: 1px solid #e5ebf1;
+  font-weight: 700;
+}
+
+.jsonSummary::-webkit-details-marker {
+  display: none;
+}
+
+.jsonOutput {
+  margin: 0;
+  padding: 15px;
+  max-height: 255px;
+  overflow: auto;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #d1f6f0;
+  background: linear-gradient(140deg, #13353f 0%, #0b2431 100%), #0b2431;
+}

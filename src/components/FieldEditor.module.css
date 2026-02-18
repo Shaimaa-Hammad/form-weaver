@@ -1,0 +1,116 @@
+.card {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+}
+
+.editorCard {
+  min-height: 350px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 15px;
+  border-bottom: 1px solid #e5ebf1;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.emptyState {
+  padding: 24px 15px;
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-weight: 700;
+}
+
+.emptyCopy {
+  margin: 7px 0 0;
+  color: var(--text-muted);
+}
+
+.editorContent {
+  padding: 14px 15px 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.formRow {
+  display: grid;
+  gap: 7px;
+}
+
+.inputLabel {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.textInput {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #b7c3d1;
+  padding: 10px 11px;
+  font: inherit;
+  background: #ffffff;
+  color: var(--text-primary);
+}
+
+.textInput:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.2);
+  border-color: var(--accent);
+}
+
+.isInvalid {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.segmentedControl {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.segment {
+  border-radius: 10px;
+  border: 1px solid #c5d0dc;
+  background: #f8fafc;
+  color: var(--text-primary);
+  font: inherit;
+  padding: 8px 11px;
+  min-width: 74px;
+  cursor: pointer;
+}
+
+.isActive {
+  border-color: var(--accent);
+  background: #e6f6f3;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.helperText {
+  margin: 0;
+  font-size: 0.79rem;
+  color: var(--text-muted);
+}
+
+.isDanger {
+  color: var(--danger);
+}
+
+.inputError {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--danger);
+}

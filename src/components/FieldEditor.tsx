@@ -1,5 +1,6 @@
 import type { Field, FieldErrors, FieldType } from '@domain/types'
 import { NUMBER_MAX_VALUE, STRING_MAX_LENGTH } from '@domain/validate'
+import styles from './FieldEditor.module.css'
 
 interface FieldEditorProps {
   field?: Field
@@ -14,6 +15,8 @@ interface FieldEditorProps {
 const typeOptions: FieldType[] = ['string', 'number', 'boolean']
 
 const formatType = (type: FieldType): string => type.charAt(0).toUpperCase() + type.slice(1)
+const cx = (...classes: Array<string | false | undefined>): string =>
+  classes.filter(Boolean).join(' ')
 
 export function FieldEditor({
   field,
@@ -26,13 +29,15 @@ export function FieldEditor({
 }: FieldEditorProps) {
   if (!field) {
     return (
-      <section className="card editor-card" aria-label="Field editor">
-        <header className="card-header">
-          <h2 className="card-title">Field Editor</h2>
+      <section className={cx(styles.card, styles.editorCard)} aria-label="Field editor">
+        <header className={styles.cardHeader}>
+          <h2 className={styles.cardTitle}>Field Editor</h2>
         </header>
-        <div className="empty-state">
-          <p className="empty-title">No field selected</p>
-          <p className="empty-copy">Pick a field from the list or create one to edit it here.</p>
+        <div className={styles.emptyState}>
+          <p className={styles.emptyTitle}>No field selected</p>
+          <p className={styles.emptyCopy}>
+            Pick a field from the list or create one to edit it here.
+          </p>
         </div>
       </section>
     )
@@ -47,19 +52,19 @@ export function FieldEditor({
   const hasValueError = Boolean(errors.value)
 
   return (
-    <section className="card editor-card" aria-label="Field editor">
-      <header className="card-header">
-        <h2 className="card-title">Field Editor</h2>
+    <section className={cx(styles.card, styles.editorCard)} aria-label="Field editor">
+      <header className={styles.cardHeader}>
+        <h2 className={styles.cardTitle}>Field Editor</h2>
       </header>
 
-      <div className="editor-content">
-        <div className="form-row">
-          <label htmlFor={fieldNameInputId} className="input-label">
+      <div className={styles.editorContent}>
+        <div className={styles.formRow}>
+          <label htmlFor={fieldNameInputId} className={styles.inputLabel}>
             Field Name
           </label>
           <input
             id={fieldNameInputId}
-            className={`text-input ${hasFieldNameError ? 'is-invalid' : ''}`}
+            className={cx(styles.textInput, hasFieldNameError && styles.isInvalid)}
             type="text"
             value={field.fieldName}
             onChange={(event) => onFieldNameChange(event.target.value)}
@@ -67,20 +72,20 @@ export function FieldEditor({
             aria-describedby={hasFieldNameError ? fieldNameErrorId : undefined}
           />
           {hasFieldNameError ? (
-            <p className="input-error" id={fieldNameErrorId}>
+            <p className={styles.inputError} id={fieldNameErrorId}>
               {errors.fieldName}
             </p>
           ) : null}
         </div>
 
-        <div className="form-row">
-          <p className="input-label">Type</p>
-          <div className="segmented-control" role="group" aria-label="Field type">
+        <div className={styles.formRow}>
+          <p className={styles.inputLabel}>Type</p>
+          <div className={styles.segmentedControl} role="group" aria-label="Field type">
             {typeOptions.map((type) => (
               <button
                 key={type}
                 type="button"
-                className={`segment ${field.type === type ? 'is-active' : ''}`}
+                className={cx(styles.segment, field.type === type && styles.isActive)}
                 aria-pressed={field.type === type}
                 onClick={() => onTypeChange(type)}
               >
@@ -91,13 +96,13 @@ export function FieldEditor({
         </div>
 
         {field.type === 'string' ? (
-          <div className="form-row">
-            <label htmlFor={valueInputId} className="input-label">
+          <div className={styles.formRow}>
+            <label htmlFor={valueInputId} className={styles.inputLabel}>
               Value
             </label>
             <input
               id={valueInputId}
-              className={`text-input ${hasValueError ? 'is-invalid' : ''}`}
+              className={cx(styles.textInput, hasValueError && styles.isInvalid)}
               type="text"
               value={field.value}
               onChange={(event) => onStringValueChange(event.target.value)}
@@ -109,13 +114,16 @@ export function FieldEditor({
               }
             />
             <p
-              className={`helper-text ${field.value.length > STRING_MAX_LENGTH ? 'is-danger' : ''}`}
+              className={cx(
+                styles.helperText,
+                field.value.length > STRING_MAX_LENGTH && styles.isDanger,
+              )}
               id={`string-counter-${field.id}`}
             >
               {field.value.length}/{STRING_MAX_LENGTH}
             </p>
             {hasValueError ? (
-              <p className="input-error" id={valueErrorId}>
+              <p className={styles.inputError} id={valueErrorId}>
                 {errors.value}
               </p>
             ) : null}
@@ -123,13 +131,13 @@ export function FieldEditor({
         ) : null}
 
         {field.type === 'number' ? (
-          <div className="form-row">
-            <label htmlFor={valueInputId} className="input-label">
+          <div className={styles.formRow}>
+            <label htmlFor={valueInputId} className={styles.inputLabel}>
               Value
             </label>
             <input
               id={valueInputId}
-              className={`text-input ${hasValueError ? 'is-invalid' : ''}`}
+              className={cx(styles.textInput, hasValueError && styles.isInvalid)}
               type="number"
               value={field.value}
               onChange={(event) => {
@@ -145,11 +153,11 @@ export function FieldEditor({
                   : `number-help-${field.id}`
               }
             />
-            <p className="helper-text" id={`number-help-${field.id}`}>
+            <p className={styles.helperText} id={`number-help-${field.id}`}>
               Max {NUMBER_MAX_VALUE}
             </p>
             {hasValueError ? (
-              <p className="input-error" id={valueErrorId}>
+              <p className={styles.inputError} id={valueErrorId}>
                 {errors.value}
               </p>
             ) : null}
@@ -157,12 +165,12 @@ export function FieldEditor({
         ) : null}
 
         {field.type === 'boolean' ? (
-          <div className="form-row">
-            <p className="input-label">Value</p>
-            <div className="segmented-control" role="group" aria-label="Boolean value">
+          <div className={styles.formRow}>
+            <p className={styles.inputLabel}>Value</p>
+            <div className={styles.segmentedControl} role="group" aria-label="Boolean value">
               <button
                 type="button"
-                className={`segment ${field.value ? 'is-active' : ''}`}
+                className={cx(styles.segment, field.value && styles.isActive)}
                 aria-pressed={field.value}
                 onClick={() => onBooleanValueChange(true)}
               >
@@ -170,7 +178,7 @@ export function FieldEditor({
               </button>
               <button
                 type="button"
-                className={`segment ${!field.value ? 'is-active' : ''}`}
+                className={cx(styles.segment, !field.value && styles.isActive)}
                 aria-pressed={!field.value}
                 onClick={() => onBooleanValueChange(false)}
               >
@@ -178,7 +186,7 @@ export function FieldEditor({
               </button>
             </div>
             {hasValueError ? (
-              <p className="input-error" id={valueErrorId}>
+              <p className={styles.inputError} id={valueErrorId}>
                 {errors.value}
               </p>
             ) : null}

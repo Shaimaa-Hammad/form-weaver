@@ -1,4 +1,5 @@
 import type { ToastMessage } from '@domain/types'
+import styles from './Toast.module.css'
 
 interface ToastProps {
   toast?: ToastMessage
@@ -12,11 +13,12 @@ export function Toast({ toast, onClose }: ToastProps) {
 
   const role = toast.kind === 'error' ? 'alert' : 'status'
   const live = toast.kind === 'error' ? 'assertive' : 'polite'
+  const variantClass = toast.kind === 'error' ? styles.toastError : styles.toastSuccess
 
   return (
-    <div className={`toast toast-${toast.kind}`} role={role} aria-live={live}>
-      <p className="toast-message">{toast.message}</p>
-      <button type="button" className="toast-close" onClick={onClose}>
+    <div className={`${styles.toast} ${variantClass}`} role={role} aria-live={live}>
+      <p className={styles.toastMessage}>{toast.message}</p>
+      <button type="button" className={styles.toastClose} onClick={onClose}>
         Close
       </button>
     </div>

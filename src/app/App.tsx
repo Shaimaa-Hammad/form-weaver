@@ -9,13 +9,17 @@ import type { FieldType } from '@domain/types'
 import { createFieldByType } from '@domain/types'
 import { hasValidationErrors, validateAll } from '@domain/validate'
 import { createSchema, updateSchema } from '@services/schemaApi'
+import styles from './App.module.css'
+
+const cx = (...classes: Array<string | false | undefined>): string =>
+  classes.filter(Boolean).join(' ')
 
 function App() {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   const selectedField = state.fields.find((field) => field.id === state.selectedId)
   const errorsById = validateAll(state.fields)
-  const selectedErrors = selectedField ? errorsById[selectedField.id] ?? {} : {}
+  const selectedErrors = selectedField ? (errorsById[selectedField.id] ?? {}) : {}
 
   const handleAddField = () => {
     dispatch({
@@ -86,9 +90,7 @@ function App() {
       })
     } catch (error) {
       const message =
-        error instanceof Error
-          ? error.message
-          : 'Unexpected error happened while saving.'
+        error instanceof Error ? error.message : 'Unexpected error happened while saving.'
 
       dispatch({
         type: 'save_error',
@@ -98,25 +100,25 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
-      <header className="app-header">
+    <div className={styles.appShell}>
+      <header className={styles.appHeader}>
         <div>
-          <p className="eyebrow">Dynamic Schema Admin</p>
-          <h1 className="app-title">Dynamic Form Builder</h1>
+          <p className={styles.eyebrow}>Dynamic Schema Admin</p>
+          <h1 className={styles.appTitle}>Dynamic Form Builder</h1>
         </div>
-        <div className="save-mode-card">
-          <span className="save-mode-label">Save Mode</span>
-          <strong className="save-mode-value">
+        <div className={styles.saveModeCard}>
+          <span className={styles.saveModeLabel}>Save Mode</span>
+          <strong className={styles.saveModeValue}>
             {state.schemaId ? 'PUT (update)' : 'POST (create)'}
           </strong>
-          <p className="save-mode-meta">
+          <p className={styles.saveModeMeta}>
             {state.schemaId ? `Schema ID: ${state.schemaId}` : 'No schemaId yet'}
           </p>
         </div>
       </header>
 
-      <main className="main-layout">
-        <section className="panel-grid">
+      <main className={styles.mainLayout}>
+        <section className={styles.panelGrid}>
           <FieldsList
             fields={state.fields}
             selectedId={state.selectedId}
@@ -171,18 +173,18 @@ function App() {
 
         <JsonPreview schemaId={state.schemaId} fields={state.fields} />
 
-        <div className="action-bar" role="region" aria-label="Form actions">
-          <p className={`dirty-state ${state.dirty ? 'is-dirty' : ''}`}>
+        <div className={styles.actionBar} role="region" aria-label="Form actions">
+          <p className={cx(styles.dirtyState, state.dirty && styles.isDirty)}>
             {state.dirty ? 'Unsaved changes' : 'All changes saved'}
           </p>
           <button
             type="button"
-            className="btn btn-primary"
+            className={cx(styles.btn, styles.btnPrimary)}
             onClick={handleSave}
             disabled={state.saving || !state.dirty}
             aria-busy={state.saving}
           >
-            {state.saving ? <span className="spinner" aria-hidden="true" /> : null}
+            {state.saving ? <span className={styles.spinner} aria-hidden="true" /> : null}
             {state.saving ? 'Saving...' : 'Save'}
           </button>
         </div>
