@@ -92,4 +92,18 @@ test.describe('Dynamic Form Builder', () => {
       await expect(page.getByLabel('JSON preview')).toContainText('Second version')
     })
   })
+
+  test.describe('F) Delete Field', () => {
+    test('removes a field from list and JSON preview', async ({ page }) => {
+      await addField(page, 'Temporary Field')
+      await page.getByLabel('Value').fill('To be deleted')
+
+      await expect(page.getByLabel('JSON preview')).toContainText('Temporary Field')
+      await page.getByRole('button', { name: 'Delete Temporary Field' }).click()
+
+      await expect(page.getByRole('button', { name: 'Delete Temporary Field' })).toHaveCount(0)
+      await expect(page.getByLabel('JSON preview')).not.toContainText('Temporary Field')
+      await expect(page.getByText('No fields yet')).toBeVisible()
+    })
+  })
 })
