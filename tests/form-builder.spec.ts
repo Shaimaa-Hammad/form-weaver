@@ -8,6 +8,21 @@ const addField = async (page: Page, fieldName: string) => {
   await page.getByLabel('Field Name').fill(fieldName)
 }
 
+interface PreviewPayload {
+  schemaId?: string
+  fields: Array<{
+    id: string
+    fieldName: string
+    type: 'string' | 'number' | 'boolean'
+    value: string | number | boolean
+  }>
+}
+
+const readPreviewPayload = async (page: Page): Promise<PreviewPayload> => {
+  const rawJson = await page.getByLabel('JSON preview').innerText()
+  return JSON.parse(rawJson) as PreviewPayload
+}
+
 test.describe('Dynamic Form Builder', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
@@ -104,6 +119,42 @@ test.describe('Dynamic Form Builder', () => {
       await expect(page.getByRole('button', { name: 'Delete Temporary Field' })).toHaveCount(0)
       await expect(page.getByLabel('JSON preview')).not.toContainText('Temporary Field')
       await expect(page.getByText('No fields yet')).toBeVisible()
+    })
+  })
+
+  test.describe('G) Type Switch Cleanup', () => {
+    test('keeps only relevant typed value after type changes', async ({ page }) => {
+      await addField(page, 'Switch Field')
+      await page.getByLabel('Value').fill('initial text')
+
+      let payload = await readPreviewPayload(page)
+      expect(payload.fields).toHaveLength(1)
+      expect(payload.fields[0]?.type).toBe('string')
+      expect(payload.fields[0]?.value).toBe('initial text')
+
+      await page.getByRole('button', { name: 'Number' }).click()
+      payload = await readPreviewPayload(page)
+      expect(payload.fields[0]?.type).toBe('number')
+      expect(typeof payload.fields[0]?.value).toBe('number')
+      expect(payload.fields[0]?.value).toBe(0)
+      expect(JSON.stringify(payload)).not.toContain('initial text')
+
+      await page.getByLabel('Value').fill('42')
+      payload = await readPreviewPayload(page)
+      expect(payload.fields[0]?.type).toBe('number')
+      expect(payload.fields[0]?.value).toBe(42)
+
+      await page.getByRole('button', { name: 'Boolean' }).click()
+      payload = await readPreviewPayload(page)
+      expect(payload.fields[0]?.type).toBe('boolean')
+      expect(typeof payload.fields[0]?.value).toBe('boolean')
+      expect(payload.fields[0]?.value).toBe(false)
+      expect(JSON.stringify(payload)).not.toContain('"value":42')
+
+      await page.getByRole('button', { name: 'Yes' }).click()
+      payload = await readPreviewPayload(page)
+      expect(payload.fields[0]?.type).toBe('boolean')
+      expect(payload.fields[0]?.value).toBe(true)
     })
   })
 })
