@@ -67,6 +67,24 @@
   align-items: start;
 }
 
+.bootPanel {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+  padding: 18px 20px;
+}
+
+.bootTitle {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.bootCopy {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+}
+
 .actionBar {
   position: sticky;
   bottom: 12px;
