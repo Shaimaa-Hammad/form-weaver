@@ -82,6 +82,7 @@ export function FieldsList({
                     type="button"
                     className={cx(styles.iconButton, styles.danger)}
                     aria-label={`Delete ${displayName}`}
+                    title={`Delete ${displayName}`}
                     onClick={() => onDeleteField(field.id)}
                   >
                     X
