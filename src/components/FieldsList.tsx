@@ -80,14 +80,6 @@ export function FieldsList({
                 <div className={styles.fieldActions} aria-label={`Actions for ${displayName}`}>
                   <button
                     type="button"
-                    className={styles.iconButton}
-                    aria-label={`Edit ${displayName}`}
-                    onClick={() => onSelectField(field.id)}
-                  >
-                    E
-                  </button>
-                  <button
-                    type="button"
                     className={cx(styles.iconButton, styles.danger)}
                     aria-label={`Delete ${displayName}`}
                     onClick={() => onDeleteField(field.id)}
