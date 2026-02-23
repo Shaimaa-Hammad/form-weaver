@@ -6,7 +6,15 @@
 }
 
 .fieldsCard {
-  min-height: 350px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldsBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .cardHeader {
@@ -189,6 +197,10 @@
 }
 
 @media (max-width: 920px) {
+  .fieldsCard {
+    height: 380px;
+  }
+
   .btn {
     width: 100%;
     justify-content: center;
