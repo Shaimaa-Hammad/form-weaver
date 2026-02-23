@@ -1,4 +1,4 @@
-import type { Field, FieldErrorsById } from '@domain/types'
+import type { Field, FieldErrorsById } from '@domain'
 import styles from './FieldsList.module.css'
 
 interface FieldsListProps {

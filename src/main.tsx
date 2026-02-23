@@ -1,5 +1,5 @@
-import bootstrapStyles from './app/bootstrap.css?inline'
-import globalStyles from './app/global.css?inline'
+import bootstrapStyles from '@app/bootstrap.css?inline'
+import globalStyles from '@app/global.css?inline'
 
 const rootElement = document.getElementById('root')
 
@@ -30,7 +30,7 @@ const mountApp = async (): Promise<void> => {
   const [{ StrictMode, createElement }, { createRoot }, { default: App }] = await Promise.all([
     import('react'),
     import('react-dom/client'),
-    import('./app/App'),
+    import('@app'),
   ])
 
   rootElement.innerHTML = ''

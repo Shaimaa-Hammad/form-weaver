@@ -1,5 +1,10 @@
-import type { Field, FieldErrors, FieldType } from '@domain/types'
-import { NUMBER_MAX_VALUE, STRING_MAX_LENGTH } from '@domain/validate'
+import {
+  NUMBER_MAX_VALUE,
+  STRING_MAX_LENGTH,
+  type Field,
+  type FieldErrors,
+  type FieldType,
+} from '@domain'
 import styles from './FieldEditor.module.css'
 
 interface FieldEditorProps {

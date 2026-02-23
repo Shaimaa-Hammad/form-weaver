@@ -1,4 +1,4 @@
-import type { Field } from '@domain/types'
+import type { Field } from '@domain'
 import styles from './JsonPreview.module.css'
 
 interface JsonPreviewProps {

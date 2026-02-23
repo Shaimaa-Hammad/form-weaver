@@ -1,14 +1,15 @@
 import { useReducer } from 'react'
 
-import { FieldEditor } from '@components/FieldEditor'
-import { FieldsList } from '@components/FieldsList'
-import { JsonPreview } from '@components/JsonPreview'
-import { Toast } from '@components/Toast'
-import { appReducer, initialState } from '@domain/reducer'
-import type { FieldType } from '@domain/types'
-import { createFieldByType } from '@domain/types'
-import { hasValidationErrors, validateAll } from '@domain/validate'
-import { createSchema, updateSchema } from '@services/schemaApi'
+import { FieldEditor, FieldsList, JsonPreview, Toast } from '@components'
+import {
+  appReducer,
+  createFieldByType,
+  hasValidationErrors,
+  initialState,
+  validateAll,
+  type FieldType,
+} from '@domain'
+import { createSchema, updateSchema } from '@services'
 import styles from './App.module.css'
 
 const cx = (...classes: Array<string | false | undefined>): string =>

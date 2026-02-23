@@ -1,4 +1,4 @@
-import type { ToastMessage } from '@domain/types'
+import type { ToastMessage } from '@domain'
 import styles from './Toast.module.css'
 
 interface ToastProps {

@@ -1,4 +1,4 @@
-import type { Field } from '@domain/types'
+import type { Field } from '@domain'
 
 const schemaStore = new Map<string, Field[]>()
 const NETWORK_DELAY_MS = 700
