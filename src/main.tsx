@@ -1,5 +1,5 @@
+import './app/bootstrap.css'
 import './app/global.css'
-import appStyles from './app/App.module.css'
 
 const rootElement = document.getElementById('root')
 
@@ -27,22 +27,22 @@ const mountApp = async (): Promise<void> => {
 
 const renderBootstrap = (): void => {
   rootElement.innerHTML = `
-    <div class="${appStyles.appShell}">
-      <header class="${appStyles.appHeader}">
+    <div class="fw-boot-shell">
+      <header class="fw-boot-header">
         <div>
-          <p class="${appStyles.eyebrow}">Dynamic Schema Admin</p>
-          <h1 class="${appStyles.appTitle}">Dynamic Form Builder</h1>
+          <p class="fw-boot-eyebrow">Dynamic Schema Admin</p>
+          <h1 class="fw-boot-title">Dynamic Form Builder</h1>
         </div>
-        <div class="${appStyles.saveModeCard}">
-          <span class="${appStyles.saveModeLabel}">Save Mode</span>
-          <strong class="${appStyles.saveModeValue}">POST (create)</strong>
-          <p class="${appStyles.saveModeMeta}">No schemaId yet</p>
+        <div class="fw-boot-save-card">
+          <span class="fw-boot-save-label">Save Mode</span>
+          <strong class="fw-boot-save-value">POST (create)</strong>
+          <p class="fw-boot-save-meta">No schemaId yet</p>
         </div>
       </header>
-      <main class="${appStyles.mainLayout}">
-        <section class="${appStyles.bootPanel}" role="status" aria-live="polite">
-          <h2 class="${appStyles.bootTitle}">Preparing editor</h2>
-          <p class="${appStyles.bootCopy}">
+      <main class="fw-boot-main">
+        <section class="fw-boot-panel" role="status" aria-live="polite">
+          <h2 class="fw-boot-panel-title">Preparing editor</h2>
+          <p class="fw-boot-panel-copy">
             Loading the full editor...
           </p>
         </section>

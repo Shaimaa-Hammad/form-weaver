@@ -1,0 +1,89 @@
+.fw-boot-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(16px, 2.8vw, 30px);
+}
+
+.fw-boot-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.fw-boot-eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fw-boot-title {
+  margin: 6px 0 0;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.fw-boot-save-card {
+  min-width: 205px;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 11px 13px;
+  box-shadow: var(--shadow-soft);
+}
+
+.fw-boot-save-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.fw-boot-save-value {
+  font-size: 0.97rem;
+}
+
+.fw-boot-save-meta {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  word-break: break-all;
+}
+
+.fw-boot-main {
+  display: grid;
+  gap: 16px;
+}
+
+.fw-boot-panel {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+  padding: 18px 20px;
+}
+
+.fw-boot-panel-title {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.fw-boot-panel-copy {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 920px) {
+  .fw-boot-header {
+    flex-direction: column;
+  }
+
+  .fw-boot-save-card {
+    width: 100%;
+  }
+}
