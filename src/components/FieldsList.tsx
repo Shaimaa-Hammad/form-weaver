@@ -43,56 +43,58 @@ export function FieldsList({
         </button>
       </header>
 
-      {fields.length === 0 ? (
-        <div className={styles.emptyState} role="status">
-          <p className={styles.emptyTitle}>No fields yet</p>
-          <p className={styles.emptyCopy}>Start by adding your first field on the left panel.</p>
-        </div>
-      ) : (
-        <ul className={styles.fieldsList}>
-          {fields.map((field) => {
-            const hasErrors = Boolean(errorsById[field.id])
-            const displayName = field.fieldName.trim() || 'Untitled'
-            const isSelected = selectedId === field.id
+      <div className={styles.fieldsBody}>
+        {fields.length === 0 ? (
+          <div className={styles.emptyState} role="status">
+            <p className={styles.emptyTitle}>No fields yet</p>
+            <p className={styles.emptyCopy}>Start by adding your first field on the left panel.</p>
+          </div>
+        ) : (
+          <ul className={styles.fieldsList}>
+            {fields.map((field) => {
+              const hasErrors = Boolean(errorsById[field.id])
+              const displayName = field.fieldName.trim() || 'Untitled'
+              const isSelected = selectedId === field.id
 
-            return (
-              <li key={field.id} className={cx(styles.fieldRow, isSelected && styles.isSelected)}>
-                <button
-                  type="button"
-                  className={styles.fieldSelectButton}
-                  aria-current={isSelected ? 'true' : undefined}
-                  onClick={() => onSelectField(field.id)}
-                >
-                  <span className={styles.fieldNameWrap}>
-                    <span className={styles.fieldName}>{displayName}</span>
-                    <span className={cx(styles.typePill, typePillByType[field.type])}>
-                      {formatType(field.type)}
-                    </span>
-                  </span>
-                  {hasErrors ? (
-                    <span className={styles.errorChip} title="This field has validation errors">
-                      <span className={styles.errorDot} aria-hidden="true" />
-                      Needs attention
-                    </span>
-                  ) : null}
-                </button>
-
-                <div className={styles.fieldActions} aria-label={`Actions for ${displayName}`}>
+              return (
+                <li key={field.id} className={cx(styles.fieldRow, isSelected && styles.isSelected)}>
                   <button
                     type="button"
-                    className={cx(styles.iconButton, styles.danger)}
-                    aria-label={`Delete ${displayName}`}
-                    title={`Delete ${displayName}`}
-                    onClick={() => onDeleteField(field.id)}
+                    className={styles.fieldSelectButton}
+                    aria-current={isSelected ? 'true' : undefined}
+                    onClick={() => onSelectField(field.id)}
                   >
-                    X
+                    <span className={styles.fieldNameWrap}>
+                      <span className={styles.fieldName}>{displayName}</span>
+                      <span className={cx(styles.typePill, typePillByType[field.type])}>
+                        {formatType(field.type)}
+                      </span>
+                    </span>
+                    {hasErrors ? (
+                      <span className={styles.errorChip} title="This field has validation errors">
+                        <span className={styles.errorDot} aria-hidden="true" />
+                        Needs attention
+                      </span>
+                    ) : null}
                   </button>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      )}
+
+                  <div className={styles.fieldActions} aria-label={`Actions for ${displayName}`}>
+                    <button
+                      type="button"
+                      className={cx(styles.iconButton, styles.danger)}
+                      aria-label={`Delete ${displayName}`}
+                      title={`Delete ${displayName}`}
+                      onClick={() => onDeleteField(field.id)}
+                    >
+                      X
+                    </button>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
     </section>
   )
 }
