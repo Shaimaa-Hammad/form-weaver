@@ -1,5 +1,5 @@
-import './app/bootstrap.css'
-import './app/global.css'
+import bootstrapStyles from './app/bootstrap.css?inline'
+import globalStyles from './app/global.css?inline'
 
 const rootElement = document.getElementById('root')
 
@@ -8,6 +8,18 @@ if (!rootElement) {
 }
 
 let hasMounted = false
+const CRITICAL_STYLES_ID = 'fw-critical-styles'
+
+const ensureCriticalStyles = (): void => {
+  if (document.getElementById(CRITICAL_STYLES_ID)) {
+    return
+  }
+
+  const styleElement = document.createElement('style')
+  styleElement.id = CRITICAL_STYLES_ID
+  styleElement.textContent = `${globalStyles}\n${bootstrapStyles}`
+  document.head.append(styleElement)
+}
 
 const mountApp = async (): Promise<void> => {
   if (hasMounted) {
@@ -60,5 +72,6 @@ const scheduleAutoMount = (): void => {
   })
 }
 
+ensureCriticalStyles()
 renderBootstrap()
 scheduleAutoMount()
