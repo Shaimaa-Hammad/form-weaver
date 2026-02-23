@@ -18,9 +18,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@app": ["src/app/index.ts"],
       "@app/*": ["src/app/*"],
+      "@components": ["src/components/index.ts"],
       "@components/*": ["src/components/*"],
+      "@domain": ["src/domain/index.ts"],
       "@domain/*": ["src/domain/*"],
+      "@services": ["src/services/index.ts"],
       "@services/*": ["src/services/*"]
     },
 
